@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :password_digest
       t.string :name, limit: 50
       t.references :profile, null: false, foreign_key: true
-      t.integer :status
+      t.integer :status, default: 0, null: false
 
       t.timestamps
     end

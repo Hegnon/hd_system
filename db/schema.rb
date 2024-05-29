@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_003423) do
     t.string "password_digest"
     t.string "name", limit: 50
     t.bigint "profile_id", null: false
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
