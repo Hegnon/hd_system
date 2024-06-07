@@ -1,2 +1,26 @@
-<h1>Auth#login</h1>
-<p>Find me in app/views/auth/login.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login de Usuário</title>
+  <%= stylesheet_link_tag 'tailwind', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="min-h-screen flex items-center justify-center">
+  <div class="bg-white p-6 rounded shadow-md w-full max-w-sm">
+    <h1 class="text-2xl font-bold mb-6">Login</h1>
+    <%= form_with(url: auth_login_path, local: true) do |form| %>
+      <div class="mb-4">
+        <%= form.label :email, class: "block text-gray-700" %>
+        <%= form.email_field :email, class: "mt-1 block w-full" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :password, class: "block text-gray-700" %>
+        <%= form.password_field :password, class: "mt-1 block w-full" %>
+      </div>
+      <%= form.submit 'Login', class: "w-full bg-blue-500 text-white py-2 rounded" %>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>

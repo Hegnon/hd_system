@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro de Usuário</title>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="min-h-screen flex items-center justify-center">
+  <div class="bg-white p-6 rounded shadow-md w-full max-w-sm">
+    <h1 class="text-2xl font-bold mb-6">Registrar</h1>
+    <%= form_with(model: @user, url: users_path, local: true) do |form| %>
+      <div class="mb-4">
+        <%= form.label :name, class: "block text-gray-700" %>
+        <%= form.text_field :name, class: "mt-1 block w-full" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :email, class: "block text-gray-700" %>
+        <%= form.email_field :email, class: "mt-1 block w-full" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :status, "Status", class: "block text-gray-700" %>
+        <%= form.select :status, options_for_select([['Ativo', 'ativo'], ['Bloqueado', 'bloqueado'], ['Desativado', 'desativado']]), {}, class: "mt-1 block w-full" %>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :profile_id, "Profile", class: "block text-gray-700" %>
+        <%= form.select :profile_id, options_for_select(@profiles), {}, class: "mt-1 block w-full" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :password, class: "block text-gray-700" %>
+        <%= form.password_field :password, class: "mt-1 block w-full" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :password_confirmation, class: "block text-gray-700" %>
+        <%= form.password_field :password_confirmation, class: "mt-1 block w-full" %>
+      </div>
+      <%= form.submit 'Registrar', class: "w-full bg-blue-500 text-white py-2 rounded" %>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>

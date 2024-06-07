@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   belongs_to :profile
 
-  enum status: { ativo: 0, bloqueado: 1, excluido: 2 }
+  enum status: { ativo: 0, bloqueado: 1, desativado: 2 }
 
   validates :email, presence: true, uniqueness: true, length: { maximum: 60 }
   validates :password_digest, presence: true
