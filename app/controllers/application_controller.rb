@@ -4,13 +4,21 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    token = request.headers['Authorization']&.split(' ')&.last
-    return render json: { error: 'Unauthorized' }, status: :unauthorized unless token
+    token = session[:token] || request.headers['Authorization']&.split(' ')&.last
+    unless token
+      redirect_to auth_login_path, alert: 'Unauthorized access. Please log in.'
+      return
+    end
 
     decoded_token = AuthenticationService.decode_token(token)
-    return render json: { error: 'Unauthorized' }, status: :unauthorized unless decoded_token
+    unless decoded_token
+      redirect_to auth_login_path, alert: 'Invalid token. Please log in again.'
+      return
+    end
 
     @current_user = User.find_by(id: decoded_token['user_id'])
-    render json: { error: 'Unauthorized' }, status: :unauthorized unless @current_user
+    unless @current_user
+      redirect_to auth_login_path, alert: 'Invalid user. Please log in again.'
+    end
   end
 end

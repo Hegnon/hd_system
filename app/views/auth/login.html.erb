@@ -6,17 +6,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="min-h-screen flex items-center justify-center">
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
   <div class="bg-white p-6 rounded shadow-md w-full max-w-sm">
     <h1 class="text-2xl font-bold mb-6">Login</h1>
+    <% if flash[:alert] %>
+      <div class="mb-4 text-red-500">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="mb-4 text-green-500">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
     <%= form_with(url: auth_login_path, local: true) do |form| %>
       <div class="mb-4">
         <%= form.label :email, class: "block text-gray-700" %>
-        <%= form.email_field :email, class: "mt-1 block w-full" %>
+        <%= form.email_field :email, class: "mt-1 block w-full p-2 border rounded" %>
       </div>
       <div class="mb-4">
         <%= form.label :password, class: "block text-gray-700" %>
-        <%= form.password_field :password, class: "mt-1 block w-full" %>
+        <%= form.password_field :password, class: "mt-1 block w-full p-2 border rounded" %>
       </div>
       <%= form.submit 'Login', class: "w-full bg-blue-500 text-white py-2 rounded" %>
     <% end %>
