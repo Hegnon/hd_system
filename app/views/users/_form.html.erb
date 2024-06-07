@@ -1,0 +1,36 @@
+<%= form_with(model: user, local: true, class: "space-y-4") do |form| %>
+  <% if user.errors.any? %>
+    <div class="bg-red-100 text-red-700 p-4 rounded">
+      <h2 class="font-bold"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :email, class: "block mb-1 font-bold" %>
+    <%= form.text_field :email, class: "w-full border-gray-300 rounded" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, class: "block mb-1 font-bold" %>
+    <%= form.password_field :password, class: "w-full border-gray-300 rounded" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name, class: "block mb-1 font-bold" %>
+    <%= form.text_field :name, class: "w-full border-gray-300 rounded" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status, class: "block mb-1 font-bold" %>
+    <%= form.select :status, User.statuses.keys.map { |w| [w.humanize, w] }, {}, class: "w-full border-gray-300 rounded" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "bg-blue-500 text-white py-2 px-4 rounded" %>
+  </div>
+<% end %>
